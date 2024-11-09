@@ -36,7 +36,7 @@ class Shop {
         System.out.print("\t\t\t\t   Enter Password: ");
         String password = sc.next();
 
-        if ("manoj@gmail.com".equals(email) && "manoj@123".equals(password)) {
+        if ("anand@gmail.com".equals(email) && "anand@123".equals(password)) {
             administrator();
         } else {
             System.out.println("\t\t\t\t   Invalid email/password");
