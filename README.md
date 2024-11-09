@@ -5,7 +5,7 @@ This is a Java-based shopping system program that allows users to manage product
 ## Features
 - **Product Management**: Add, update, and remove products from the system.
 - **Buyer Functionality**: Manage the shopping cart, add products to the cart, and calculate the total price.
-- **Receipt Generation**: Automatically generates a receipt displaying the buyer's items and total cost.
+- **Receipt Generation**: Automatically generates a receipt displaying the buyer's items and total cost in a reciept.txt.
 - **File Handling**: Product data is stored in a file, enabling easy management and retrieval.
 - **Input Validation**: Ensures only valid input is entered by users to prevent errors and data inconsistency.
 - **User-Friendly Interface**: Simple, text-based interface for easy interaction.
