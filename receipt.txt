@@ -1,0 +1,17 @@
+			   Product Code: 4
+			   Product Name: Oppo
+			   Price: 30000.0
+			   Discount: 3.0%
+			   Quantity: 20
+			   Total Price: 600000.0
+			   Discount Amount: 18000.0
+			   Final Price: 582000.0
+			   
+			   Product Code: 6
+			   Product Name: iPhone
+			   Price: 100000.0
+			   Discount: 5.0%
+			   Quantity: 6
+			   Total Price: 600000.0
+			   Discount Amount: 30000.0
+			   Final Price: 570000.0
