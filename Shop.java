@@ -239,69 +239,52 @@ class Shop {
         }
     }
 
-    private void list() {
-        try (BufferedReader reader = new BufferedReader(new FileReader("database.txt"))) {
-            System.out.println("\n\n__________________________________");
-            System.out.println("ProNo.\t\tName\t\tPrice");
-            System.out.println("\n\n__________________________________");
+  private void receipt() {
+    System.out.println("\n\t\t\t\t   Receipt");
+    System.out.println("\t\t\t\t   ----------------------");
+    System.out.print("\t\t\t\t   Enter Product Code: ");
+    int pkey = sc.nextInt();
+    boolean found = false;
+    try (BufferedReader reader = new BufferedReader(new FileReader("database.txt"));
+         BufferedWriter receiptWriter = new BufferedWriter(new FileWriter("receipt.txt", true))) {
 
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(" ");
-                System.out.println(parts[0] + "\t\t" + parts[1] + "\t\t" + parts[2]);
+        String line;
+        while ((line = reader.readLine()) != null) {
+            String[] parts = line.split(" ");
+            int code = Integer.parseInt(parts[0]);
+
+            if (code == pkey) {
+                found = true;
+                System.out.print("\t\t\t\t   Enter Quantity: ");
+                int quantity = sc.nextInt();
+
+                float price = Float.parseFloat(parts[2]);
+                float discountRate = Float.parseFloat(parts[3]);
+                float total = price * quantity;
+                float discountAmount = total * (discountRate / 100);
+                float finalPrice = total - discountAmount;
+
+                String receipt = "\n\t\t\t   Product Code: " + parts[0] +
+                        "\n\t\t\t   Product Name: " + parts[1] +
+                        "\n\t\t\t   Price: " + price +
+                        "\n\t\t\t   Discount: " + parts[3] + "%" +
+                        "\n\t\t\t   Quantity: " + quantity +
+                        "\n\t\t\t   Total Price: " + total +
+                        "\n\t\t\t   Discount Amount: " + discountAmount +
+                        "\n\t\t\t   Final Price: " + finalPrice;
+
+                receiptWriter.write(receipt);
+                System.out.println(receipt);
+                break;
             }
-        } catch (IOException e) {
-            System.out.println("\t\t\t   Error reading the file!");
         }
-    }
-
-    private void receipt() {
-        int[] arrc = new int[100];
-        int[] arrq = new int[100];
-        int c = 0;
-        char choice;
-        float total = 0;
-
-        System.out.println("\n\t\t\t\t   RECEIPT");
-        list();
-
-        do {
-            System.out.print("\n\t\t\t\t   Enter Product Code: ");
-            arrc[c] = sc.nextInt();
-            System.out.print("\t\t\t\t   Enter Quantity: ");
-            arrq[c] = sc.nextInt();
-
-            c++;
-
-            System.out.print("\t\t\t\t   Buy another product? (y/n): ");
-            choice = sc.next().charAt(0);
-        } while (choice == 'y');
-
-        System.out.println("\nProduct No\t ProductName\t Quantity\t Price\t Amount\t Discounted Amount");
-
-        try (BufferedReader reader = new BufferedReader(new FileReader("database.txt"))) {
-            for (int i = 0; i < c; i++) {
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    String[] parts = line.split(" ");
-                    int code = Integer.parseInt(parts[0]);
-
-                    if (code == arrc[i]) {
-                        float amount = Float.parseFloat(parts[2]) * arrq[i];
-                        float disAmount = amount - (amount * Float.parseFloat(parts[3]) / 100);
-                        total += disAmount;
-                        System.out.println(parts[0] + "\t\t" + parts[1] + "\t\t" + arrq[i] + "\t\t" + parts[2] + "\t" + amount + "\t" + disAmount);
-                    }
-                }
-                reader.close();
-            }
-        } catch (IOException e) {
-            System.out.println("\t\t\t   Error reading the receipt!");
+        if (!found) {
+            System.out.println("\t\t\t\t   Product Not Found!");
         }
-
-        System.out.println("\n\n__________________________________________");
-        System.out.println(" Total Amount: " + total);
+    } catch (IOException e) {
+        System.out.println("\t\t\t\t   Error printing receipt: " + e.getMessage());
     }
+}
 
     public static void main(String[] args) {
         Shop s = new Shop();
