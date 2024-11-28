@@ -68,21 +68,24 @@ class Shop {
         }
     }
 
-    private void buyer() {
-        while (true) {
-            System.out.println("\t\t\t\t\t   Buyer");
-            System.out.println("\t\t\t\t\t|   1) Buy Product   |");
-            System.out.println("\t\t\t\t\t|   2) Go Back       |");
+private void buyer() {
+    while (true) {
+        System.out.println("\t\t\t\t\t   Buyer");
+        System.out.println("\t\t\t\t\t|   1) Buy Product       |");
+        System.out.println("\t\t\t\t\t|   2) Search Product    |");
+        System.out.println("\t\t\t\t\t|   3) Go Back           |");
 
-            System.out.print("\t\t\t\t\t   Enter your choice: ");
-            int choice = getValidChoice(2);
-            if (choice == 1) {
-                receipt();
-            } else {
+        System.out.print("\t\t\t\t\t   Enter your choice: ");
+        int choice = getValidChoice(3);
+        switch (choice) {
+            case 1 -> receipt();
+            case 2 -> searchProduct(); // Allow buyer to search for products
+            case 3 -> {
                 return;
             }
         }
     }
+}
 
     private int getValidChoice(int maxChoice) {
         int choice = -1;
